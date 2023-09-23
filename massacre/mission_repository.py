@@ -36,20 +36,14 @@ class MissionRepository:
     def active_missions(self):
         return self._active_missions
 
-    def __init__(self, mission_store: dict[str, dict[int, dict]], cmdr: Optional[str] = None):
-        self._cmdr = cmdr
+    def __init__(self, mission_store: dict[int, dict]):
         self._state = MissionRepoState.AWAITING_INIT
         """
-        The Mission Repo State. The Repo is fully initialized once the Mission Data (contains all CMDRs) and 
-        the Missions-Event (for specific CMDR) are passed.
+        The Mission Repo State. The Repo is fully initialized once the Mission Data and the Missions-Event are passed.
         """
-
-        self._mission_store: dict[str, dict[int, dict]] = mission_store
+        self._mission_store: dict[int, dict] = mission_store
         """
         The Mission Store contains all missions - REGARDLESS OF IF THEY ARE ACTIVE OR NOT
-        
-        Note that this contains Data for all Commanders.  
-        The first key is the CMDR, the second key is the Mission UUID
         """
         self._state |= MissionRepoState.HAS_MISSION_DATA
         """
@@ -57,24 +51,17 @@ class MissionRepository:
         """
 
         self._active_missions: dict[int, dict] = {}
-        """Active Missions are just for the current commander"""
 
         global _active_uuids, _active_uuids_init
         if _active_uuids_init:
-            self.notify_about_active_mission_uuids(_active_uuids, cmdr)
+            self.notify_about_active_mission_uuids(_active_uuids)
 
-    def notify_about_active_mission_uuids(self, uuids: list[int], cmdr: str):
+    def notify_about_active_mission_uuids(self, uuids: list[int]):
         """
         When a "Missions"-Event is found, this should be triggered.
         It should only contain active missions.
         active missions define the intersection between the provided uuids and all missions
         """
-        self._cmdr = cmdr
-
-        if cmdr is None:
-            logger.error("Passed CMDR is None! Aborting")
-            return
-
         if self._state & MissionRepoState.HAS_MISSIONS_EVENT == 0:
             self._state |= MissionRepoState.HAS_MISSIONS_EVENT
         else:
@@ -83,10 +70,10 @@ class MissionRepository:
 
         self._active_missions = {}
 
-        all_known_uuids = list(self._mission_store[cmdr].keys())
+        all_known_uuids = list(self._mission_store.keys())
         for uuid in uuids:
             if uuid in all_known_uuids:
-                self._active_missions[uuid] = self._mission_store[cmdr][uuid]
+                self._active_missions[uuid] = self._mission_store[uuid]
             else:
                 logger.warning("A Mission could not be found in the Store even though the UUID is present")
                 pass
@@ -96,9 +83,9 @@ class MissionRepository:
         for listener in active_missions_changed_event_listeners:
             listener(self._active_missions)
 
-    def notify_about_new_mission_accepted(self, mission: dict, cmdr: str):
+    def notify_about_new_mission_accepted(self, mission: dict):
         logger.info(f"New Mission with ID {mission['MissionID']} has been accepted")
-        self._mission_store[cmdr][mission["MissionID"]] = mission
+        self._mission_store[mission["MissionID"]] = mission
         self._active_missions[mission["MissionID"]] = mission
         self.update_all_listeners()
 
@@ -115,22 +102,22 @@ class MissionRepository:
         for listener in active_missions_changed_event_listeners:
             listener(self._active_missions)
         for listener in all_missions_changed_event_listeners:
-            listener(self._mission_store[self._cmdr])
+            listener(self._mission_store)
 
 
 mission_repository: Optional[MissionRepository] = None
 
 
-def set_new_repo(missions: dict[str, dict[int, dict]]):
+def set_new_repo(missions: dict[int, dict]):
     global mission_repository
     mission_repository = MissionRepository(missions)
 
 
-def set_active_uuids(uuids: list[int], cmdr: str):
+def set_active_uuids(uuids: list[int]):
     global _active_uuids, _active_uuids_init
     _active_uuids.clear()
     _active_uuids.extend(uuids)
     _active_uuids_init = True
 
     if mission_repository is not None:
-        mission_repository.notify_about_active_mission_uuids(_active_uuids, cmdr)
+        mission_repository.notify_about_active_mission_uuids(_active_uuids)
