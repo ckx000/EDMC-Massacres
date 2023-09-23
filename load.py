@@ -64,7 +64,7 @@ def journal_entry(cmdr: str, _is_beta: bool, _system: str,
         if mission_repository is not None:
             mission_repository.notify_about_new_mission_accepted(entry, cmdr)
 
-    elif entry["event"] in ["MissionAbandoned", "MissionCompleted"]:  # TODO: What about MissionRedirected?
+    elif entry["event"] in ["MissionAbandoned", "MissionCompleted", "MissionRedirected"]:
         # Mission has been completed or failed -> It is no longer active
         mission_uuid = entry["MissionID"]
         from massacre.mission_repository import mission_repository
