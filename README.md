@@ -1,4 +1,4 @@
-# ED Market Connector - Massacre Plugin/EDMC - 清缴任务插件
+# EDMC - Massacre Plugin/EDMC - 清缴任务插件
 This is a plugin for [Elite Dangerous Market Connector](https://github.com/EDCD/EDMarketConnector).<br>
 这是 [EDMC](https://github.com/EDCD/EDMarketConnector) 的一个插件
 
@@ -13,7 +13,7 @@ If you are new to Massacre Stacking, you could take a look at [this article](htt
 <p align="center">
     <img src="./readme-src/example_screenshot.png" alt="An example screenshot"/>
     <br>
-    Screenshot of EDMC with the Plugin running.
+    图片待更新
 </p>
 
 ## Usage/用法
@@ -37,6 +37,7 @@ Below you can see the main table's explanation:<br>
 <p align="center">
     <img src="./readme-src/main_table_explanations.png" alt="Main Table Explained"/>
     <br>
+    图片待更新
 </p>
 
 1. These are the mission givers<br>
@@ -95,6 +96,6 @@ Thank you [@pan-mroku](https://github.com/pan-mroku) for the Pull Request.<br>
 
 另外也支持windows版的edmcoverlay
 
-##Acknowledgments
+## Acknowledgments
 [AlphaConqueror](https://github.com/AlphaConqueror/EDMC-Massacres)<br>
 [CMDR-WDX](https://github.com/CMDR-WDX/EDMC-Massacres)
