@@ -11,9 +11,8 @@ If you are new to Massacre Stacking, you could take a look at [this article](htt
 如果您是初次接触清缴堆叠，可以阅读[这篇文章](https://tieba.baidu.com/p/9327050589).
 
 <p align="center">
-    <img src="./readme-src/example_screenshot.png" alt="An example screenshot"/>
+    <img src="./readme-src/example_screenshot.png" alt="An example screenshot"/><img src="./readme-src/example_screenshot_cn.png" alt="An example screenshot"/>
     <br>
-    图片待更新
 </p>
 
 ## Usage/用法
@@ -35,27 +34,26 @@ Below you can see the main table's explanation:<br>
 下面你可以看到关于表格的解释：
 
 <p align="center">
-    <img src="./readme-src/main_table_explanations.png" alt="Main Table Explained"/>
+    <img src="./readme-src/main_table_explanations.png" alt="Main Table Explained"/><img src="./readme-src/main_table_explanations_cn.png" alt="An example screenshot"/>
     <br>
-    图片待更新
 </p>
 
 1. These are the mission givers<br>
     这些是任务发布者,显示为各个派系<br>
-   These are the faction's mission counts,  display Missions with `Remaining with uncompleted target kills. / Total number of missions for this faction`<br>
+2. These are the faction's mission counts,  display Missions with `Remaining with uncompleted target kills. / Total number of missions for this faction`<br>
     这些是该派系的任务数量,用于显示 `还剩几个未完成目标击杀数的 / 该派系任务总数`
-2. This is distributed by the mission issuer:  `REMaining kills required / total kills REQuired for this faction's all missions`<br>
+3. This is distributed by the mission issuer:  `REMaining kills required / total kills REQuired for this faction's all missions`<br>
     这是由该任务发布者分发的:  `剩余需要完成击杀目标数的合计 / 所有清缴任务中击杀数的总和`<br>
     (因无法准确的统计个数,所以使用单个任务的数量来大致计算)
-3. This is how much reward you will get upon completion, in Millions. The Value in brackets indicates how much of that is shareable with a wing.<br>
+4. This is how much reward you will get upon completion, in Millions. The Value in brackets indicates how much of that is shareable with a wing.<br>
     这是完成后你将获得的奖励，以百万为单位。括号中的数值表示其中可分享给小队成员的金额。
-4. This is the Delta-Column. It displays the difference to the highest stack. The highest stack shows the difference to the second-highest stack and can be identified by the `-`<br>
+5. This is the Delta-Column. It displays the difference to the highest stack. The highest stack shows the difference to the second-highest stack and can be identified by the `-`<br>
     这是 Delta 列。它显示与最高堆叠的差异。最高堆叠显示与第二高堆叠的差异，并可通过 `-` 标识。<br>
-    The CompletedSum-row displays your current progress: `Number of missions with kill targets completed / Total kills achieved / Reward for completed portions`<br>
+6. The CompletedSum-row displays your current progress: `Number of missions with kill targets completed / Total kills achieved / Reward for completed portions`<br>
     已完成合计行显示你目前的进度:  `已完成击杀目标的任务个数`  `已完成的击杀数量`  `完成部分的奖励规模`
-5. The AcceptedSum-Row shows show many Kills you need to do in total, and how big the total reward is.<br>
+7. The AcceptedSum-Row shows show many Kills you need to do in total, and how big the total reward is.<br>
     已接任务合计行显示了你合计任务数量，总共需要完成的击杀次数，以及总奖励。
-6. More details showing the stack ratio (see below), rewards normalized per required kill, and the sum of all Mission-Kills.<br>
+8. More details showing the stack ratio (see below), rewards normalized per required kill, and the sum of all Mission-Kills.<br>
     更多细节展示了堆叠效率（见下文）、每次所需击杀的奖励标准化值，以及所有任务击杀的总和。
 
 **Stack-Ratio**: This figure tells you how effective you stack is. It is calculated as follows:<br>
