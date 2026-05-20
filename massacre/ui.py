@@ -12,7 +12,7 @@ from massacre.logger_factory import logger
 from massacre.version_check import open_download_page
 from theme import theme
 
-_ = functools.partial(l10n.Translations.translate, context=__file__)
+_ = functools.partial(l10n.translations.tl, context=__file__)
 
 class MassacreMissionData:
     """
@@ -380,7 +380,7 @@ class UI:
         self.__frame = tk.Frame(frame)
         #self.__frame.config(bg="red")
         self.__frame.grid(column=0, columnspan=cspan, sticky=tk.W)
-        self.__frame.bind("<<Refresh>>", lambda _: self.update_ui())
+        #self.__frame.bind("<<Refresh>>", lambda _: self.update_ui())#已直接调用self.update_ui()
         self.update_ui()
 
     def notify_about_new_massacre_mission_state(self, data: Optional[MassacreMissionData]):
@@ -428,7 +428,8 @@ class UI:
     # To be called from thread
     def notify_version_outdated(self):
         self.__display_outdated_version = True
-        self.__frame.event_generate("<<Refresh>>") # type: ignore
+        #self.__frame.event_generate("<<Refresh>>") # type: ignore
+        self.update_ui()
 
     # To be called from Button
     def notify_version_outdated_dismissed(self):

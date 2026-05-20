@@ -13,7 +13,7 @@ from ttkHyperlinkLabel import HyperlinkLabel
 # noinspection PyPep8Naming
 import myNotebook as nb
 
-_ = functools.partial(l10n.Translations.translate, context=__file__)
+_ = functools.partial(l10n.translations.tl, context=__file__)
 plugin_name = os.path.basename(os.path.dirname(__file__))
 
 class Configuration:
@@ -143,7 +143,8 @@ def build_settings_ui(root: nb.Notebook) -> tk.Frame:
         tk.IntVar(value=configuration.display_mission_count)
 
 
-    nb.Label(frame, text=_("UI Settings"), pady=10).grid(sticky=tk.W, padx=title_offset)
+    #nb.Label(frame, text=_("UI Settings"), pady=10).grid(sticky=tk.W, padx=title_offset)
+    nb.Label(frame, text=_("UI Settings")).grid(sticky=tk.W, pady=10, padx=title_offset)
     ui_settings_checkboxes = [
         nb.Checkbutton(frame, text=_("Display Delta-Column"),
                        variable=__setting_changes["display_delta_column"]),
@@ -157,10 +158,12 @@ def build_settings_ui(root: nb.Notebook) -> tk.Frame:
     for entry in ui_settings_checkboxes:
         entry.grid(columnspan=2, padx=checkbox_offset, sticky=tk.W)
  
-    nb.Label(frame, text=_("Other"), pady=10, padx=title_offset).grid(sticky=tk.W)
+    #nb.Label(frame, text=_("Other"), pady=10, padx=title_offset).grid(sticky=tk.W)
+    nb.Label(frame, text=_("Other")).grid(sticky=tk.W, pady=10, padx=title_offset)
     nb.Checkbutton(frame, text=_("Check for Updates on Start"), variable=__setting_changes["check_updates"])\
         .grid(columnspan=2, sticky=tk.W, padx=checkbox_offset)
-    nb.Label(frame, text="", pady=10).grid()
+    #nb.Label(frame, text="", pady=10).grid()
+    nb.Label(frame, text="").grid(pady=10)
     
 
     import massacre.integrations.main

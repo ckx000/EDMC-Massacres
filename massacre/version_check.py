@@ -95,7 +95,20 @@ def __worker(cb: Callable[[bool], None]):
     Function invoked by the new Thread used to check if the Version is outdated.
     """
     current_version = __get_current_version_string()
-    __is_current_version_outdated(current_version, cb)
+
+
+    def local_callback(is_outdated: bool):
+        try:
+            # 引入唯一的 ui 实例，把状态挂在它身上，解决多实例隔离问题
+            from massacre.ui import ui
+            ui.version_check_done = True
+            ui.is_version_outdated = is_outdated
+            logger.info(f"Version check thread finished. Written to UI instance. Outdated: {is_outdated}")
+        except Exception as e:
+            logger.error(f"Failed to write version status to UI instance: {str(e)}")
+
+    __is_current_version_outdated(current_version, local_callback)
+    #__is_current_version_outdated(current_version, cb)
 
 
 def build_worker(cb: Callable[[bool], None]) -> threading.Thread:
